@@ -1,0 +1,239 @@
+задание 1
+using System;
+
+public class Program
+{
+    public static int Sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Введите первое число:");
+        int number1 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Введите второе число:");
+        int number2 = Convert.ToInt32(Console.ReadLine());
+
+        int result = Sum(number1, number2);
+
+        Console.WriteLine(result);
+    }
+}
+
+
+задание 2 
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Введите число: ");
+        int num;
+
+       
+        if (int.TryParse(Console.ReadLine(), out num))
+        {
+            if (IsEven(num))
+            {
+                Console.WriteLine($"{num} является четным числом.");
+            }
+            else
+            {
+                Console.WriteLine($"{num} является нечетным числом.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Пожалуйста, введите корректное целое число.");
+        }
+    }
+
+    static bool IsEven(int number)
+    {
+        return number % 2 == 0;
+    }
+}
+
+
+
+задание 3
+using System;
+
+public class FactorialCalculator
+{
+    public static void Main(string[] args)
+    {
+        Console.Write("Введите число: ");
+        if (int.TryParse(Console.ReadLine(), out int number))
+        {
+            try
+            {
+                long factorial = CalculateFactorial(number);
+                Console.WriteLine($"Факториал {number} равен {factorial}");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Некорректный ввод. Введите целое число.");
+        }
+    }
+
+    public static long CalculateFactorial(int number)
+    {
+        if (number < 0)
+        {
+            throw new ArgumentException("Число не может быть отрицательным.");
+        }
+        else if (number == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            long result = 1;
+            for (int i = 1; i <= number; i++)
+            {
+                result *= i;
+            }
+            return result;
+        }
+    }
+}
+
+
+
+задание 4
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Введите строку: ");
+        string input = Console.ReadLine();
+
+        string reversed = ReverseString(input);
+        Console.WriteLine($" reversed string: {reversed}");
+    }
+
+    static string ReverseString(string str)
+    {
+       
+        if (str == null)
+        {
+            return null;
+        }
+
+        char[] charArray = str.ToCharArray(); 
+        Array.Reverse(charArray); 
+        return new string(charArray); 
+    }
+}
+
+
+задание 5
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Введите строку: ");
+        string input = Console.ReadLine();
+
+        bool isPalindrome = IsPalindrome(input);
+        if (isPalindrome)
+        {
+            Console.WriteLine("Строка является палиндромом.");
+        }
+        else
+        {
+            Console.WriteLine("Строка не является палиндромом.");
+        }
+    }
+
+    static bool IsPalindrome(string str)
+    {
+        if (str == null)
+        {
+            return false;
+        }
+
+        int left = 0;
+        int right = str.Length - 1;
+
+        while (left < right)
+        {
+           
+            while (left < right && !char.IsLetterOrDigit(str[left]))
+            {
+                left++;
+            }
+
+            while (left < right && !char.IsLetterOrDigit(str[right]))
+            {
+                right--;
+            }
+
+            if (char.ToLower(str[left]) != char.ToLower(str[right]))
+            {
+                return false; 
+            }
+
+            left++;
+            right--;
+        }
+
+        return true; 
+    }
+}
+
+
+
+задание 6
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Введите количество элементов в массиве: ");
+        int size = int.Parse(Console.ReadLine());
+
+        double[] numbers = new double[size];
+
+        Console.WriteLine($"Введите {size} чисел:");
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Элемент {i + 1}: ");
+            numbers[i] = double.Parse(Console.ReadLine());
+        }
+
+        double average = CalculateAverage(numbers);
+        Console.WriteLine($"Среднее значение элементов массива: {average}");
+    }
+
+    static double CalculateAverage(double[] array)
+    {
+        if (array == null || array.Length == 0)
+        {
+            throw new ArgumentException("Массив не должен быть пустым или равным null.");
+        }
+
+        double sum = 0;
+
+        foreach (double number in array)
+        {
+            sum += number;
+        }
+
+        return sum / array.Length; 
+    }
+}
